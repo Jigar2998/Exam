@@ -1,48 +1,112 @@
 {% load static %}
-<!DOCTYPE html>
 <html>
 
 <head>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="{% static 'css/login_style.css' %}" />
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+    <link rel="stylesheet" href="{% static 'css/login_style.css' %}">
 </head>
 
 <body>
-
-    <div class="wrapper fadeInDown">
-        <div id="formContent">
-            <!-- Tabs Titles -->
-
-            <!-- Icon -->
-            <div class="fadeIn first">
-                <label style="margin-top: 20px;">Login</label>
-            </div>
-
-            <!-- Login Form -->
-            <form style="margin-top: 20px;" method="POST">
-                {% csrf_token %}
-                <input type="text" id="fname" class="fadeIn second" name="fname" placeholder="First Name">
-                <input type="text" id="lname" class="fadeIn third" name="lname" placeholder="Last Name">
-                <div class="form-group">
-                    <div class="col-md 6">
-                    <input type="text" id="email" class="fadeIn third" name="lname" placeholder="Last Name">
+    <div class="container">
+        <div class="card bg-light" style="margin-top: 20px;">
+            <article class="card-body mx-auto">
+                <h4 class="card-title mt-3 text-center">Create Account</h4>
+                {% if text %}
+                <div class="alert alert-success">
+                    {{text}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
                 </div>
-                    <input type="text" id="mobile" class="fadeIn third" name="lname" placeholder="Last Name">
-                </div>
-                <input type="text" id="lname" class="fadeIn third" name="lname" placeholder="Last Name">
-                <input type="submit" class="fadeIn fourth" value="Log In">
-            </form>
-            <div class="fadeIn last" style="margin-bottom: 10px;">
-                <a href="">Don't have an Account Register</a>
-            </div>
-            <!-- Remind Passowrd -->
-            <div id="formFooter">
-                <a class="underlineHover" href="#">Forgot Password?</a>
-            </div>
+                {% endif %}
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class='row'>
+                        <div class="form-group input-group col-md-6">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                            </div>
+                            <input name="fname" class="form-control" placeholder="First name" type="text">
+                        </div>
+                        <div class="form-group input-group col-md-6">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                            </div>
+                            <input name="lname" class="form-control" placeholder="Last name" type="text">
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class="form-group input-group col-md-6">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                            </div>
+                            <input name="email" class="form-control" placeholder="Email Id" type="email">
+                        </div>
+                        <div class="form-group input-group col-md-6">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                            </div>
+                            <select name='gender'>
+                                <option value="Male">Male</option>
+                                <option value="Female">Feamle</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class="form-group input-group col-md-6">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="far fa-calendar-alt"></i> </span>
+                            </div>
+                            <input name="dob" class="form-control" placeholder="Birth Date" type="date">
+                        </div>
+                        <div class="form-group input-group col-md-6">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-images"></i> </span>
+                            </div>
+                            <input name="image" class="form-control" placeholder="Image" type="file">
+                        </div>
+                    </div>
+                    <!-- form-group// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+                        </div>
+                        <select class="custom-select" style="max-width: 120px;">
+                            <option selected>+91</option>
+                        </select>
+                        <input name="mobile" class="form-control" placeholder="Phone number" type="text">
+                    </div> <!-- form-group// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                        </div>
+                        <input class="form-control" name=address placeholder="Address" type="text">
+                    </div> <!-- form-group// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                        </div>
+                        <input class="form-control" name='password' placeholder="Create password" type="password">
+                    </div> <!-- form-group// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                        </div>
+                        <input class="form-control" placeholder="Repeat password" type="password">
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block"> Create Account </button>
+                    </div> <!-- form-group// -->
+                    <p class="text-center">Have an account? <a href="/login">Log In</a> </p>
+                </form>
+            </article>
+        </div> <!-- card.// -->
 
-        </div>
     </div>
 </body>
 

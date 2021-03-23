@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% include 'header.html' %}
+</head>
+
+<body>
+    <br><br><br>
+
+    <div style="text-align: center;">
+        <h2>User Profile</h2>
+    </div>
+    <div id="pricing" class="section sub-section">
+        <div class="container inner_page">
+            <div class="row col-md-12">
+                <img src="{{User.image.url}}" width="250px" height="200px">
+                <div class="col-md-6">
+                    <div class="icon_training">
+                        <br>
+
+                        <div class="row fname">
+                            <div class="col-md-4">
+                                <h5>First Name :</h5>
+                            </div>
+                            <div class="col-md-8"><span>{{User.fname}}</span></div>
+                        </div>
+                        <div class="row lname">
+                            <div class="col-md-4">
+                                <h5>Last name</h5>
+                            </div>
+                            <div class="col-md-8"><span>{{User.lname}}</span></div>
+                        </div>
+                        <div class="row lname">
+                            <div class="col-md-4">
+                                <h5>Mobile No.</h5>
+                            </div>
+                            <div class="col-md-8"><span>{{User.mobile}}</span></div>
+                        </div>
+                        <div class="row lname">
+                            <div class="col-md-4">
+                                <h5>Email ID </h5>
+                            </div>
+                            <div class="col-md-8"><span>{{User.email}}</span></div>
+                        </div>
+                        <div class="row lname">
+                            <div class="col-md-4">
+                                <h5>Gender </h5>
+                            </div>
+                            <div class="col-md-8"><span>{{User.gender}}</span></div>
+                        </div>
+                        <div class="row lname">
+                            <div class="col-md-4">
+                                <h5>Birth Date</h5>
+                            </div>
+                            <div class="col-md-8"><span>{{User.birth_date}}</span></div>
+                        </div>
+                        <div class="row lname">
+                            <div class="col-md-4">
+                                <h5>Address</h5>
+                            </div>
+                            <div class="col-md-8"><span>{{User.address}}</span></div>
+                        </div>
+                        <a class="btn btn-primary float-right" href="/edit_profile/{{User.id}}">Edit Profile</a>
+                        <a class="btn btn-primary float-right" href="/change_password/{{User.id}}">Change Password</a>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <br><br><br>
+    {% include 'footer.html' %}
+</body>
+
+</html>

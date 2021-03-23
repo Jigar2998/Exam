@@ -1,41 +1,43 @@
 {% load static %}
-<!DOCTYPE html>
 <html>
 
 <head>
+
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="{% static 'css/login_style.css' %}" />
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+    <link rel="stylesheet" href="{% static 'css/login_style.css' %}">
 </head>
 
 <body>
-
-    <div class="wrapper fadeInDown">
-        <div id="formContent">
-            <!-- Tabs Titles -->
-
-            <!-- Icon -->
-            <div class="fadeIn first">
-                <label style="margin-top: 20px;">Login</label>
-            </div>
-
-            <!-- Login Form -->
-            <form style="margin-top: 20px;" method="POST">
-                {% csrf_token %}
-                <input type="text" id="email" class="fadeIn second" name="email" placeholder="Email">
-                <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
-                <input type="submit" class="fadeIn fourth" value="Log In">
-            </form>
-            <div class="fadeIn last" style="margin-bottom: 10px;">
-                <a href="/register">Don't have an Account Register</a>
-            </div>
-            <!-- Remind Passowrd -->
-            <div id="formFooter">
-                <a class="underlineHover" href="#">Forgot Password?</a>
-            </div>
-
-        </div>
+    <div class="container">
+        <div class="card bg-light" style="margin-top: 100px;">
+            <article class="card-body col-md-5" style="margin-left: 300px;">
+                <h4 class="card-title mt-3 text-center">Login</h4>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                        </div>
+                        <input name="email" class="form-control" placeholder="Email Id" type="email">
+                    </div>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                        </div>
+                        <input class="form-control" name="password" placeholder="Password" type="password">
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block"> Login </button>
+                    </div> <!-- form-group// -->
+                    <p class="text-center">Don't Have an account? <a href="/register">Register</a> </p>
+                </form>
+            </article>
+        </div> <!-- card.// -->
     </div>
 </body>
 
