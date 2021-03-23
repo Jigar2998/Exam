@@ -11,3 +11,8 @@ class user(models.Model):
     address = models.CharField(max_length=100)
     image = models.ImageField()
     passeword = models.CharField(max_length=20)
+
+class contact(models.Model):
+    name = models.CharField(max_length=25)
+    email = models.EmailField()
+    message = models.CharField(max_length=100)

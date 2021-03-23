@@ -58,16 +58,17 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 animated" data-animate="fadeInLeft">
-          <form action="#">
+          <form method="POST" action="/contact">
+            {% csrf_token %}
             <div class="row">
               <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Your Name">
+                <input type="text" name='name' id='name' class="form-control" placeholder="Your Name">
               </div>
               <div class="col-md-6">
-                <input type="email" class="form-control" placeholder="Your Email">
+                <input type="email" name='email' id="email" class="form-control" placeholder="Your Email">
               </div>
               <div class="col-md-12">
-                <textarea class="form-control" rows="3" placeholder="Tell Us Everything"></textarea>
+                <textarea class="form-control" name='message' id="message" rows="3" placeholder="Tell Us Everything"></textarea>
               </div>
               <div class="col-md-12">
                 <button class="btn btn-default submit">Send Message</button>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import request
-from .models import user
+from .models import user,contact
 from django.core.files.storage import FileSystemStorage
 # Create your views here.
 
@@ -37,25 +37,31 @@ def login(request):
     if request.method == 'POST':
         mail = request.POST['email']
         password = request.POST['password']
-        User = user.objects.get(email=mail, passeword=password)
-        request.session['user'] = User.fname
-        data = user.objects.get(fname=User.fname)
-        return render(request, 'index.html', {'data': data})
+        try:
+            User = user.objects.get(email=mail, passeword=password)
+            request.session['user'] = User.fname
+            data = user.objects.get(fname=User.fname)
+            return redirect('index')
+        except:
+            text = 'Invalid Login Credential'
+            return render(request, 'login.html',{'text':text})
     else:
         return render(request, 'login.html')
 
 
 def index(request):
     if 'user' in request.session:
-        return render(request, 'index.html')
+        data = user.objects.get(fname=request.session['user'])
+        return render(request, 'index.html',{'data':data})
     else:
         return redirect('login')
 
 
 def profile(request):
     if 'user' in request.session:
-        User = user.objects.get(fname=request.session['user'])
-        return render(request, 'profile.html', {'User': User})
+        data = user.objects.get(fname=request.session['user'])
+        User = user.objects.get(fname=data.fname)
+        return render(request, 'profile.html', {'data': data,'User':User})
     else:
         return redirect('login')
 
@@ -87,6 +93,7 @@ def edit_profile(request, id):
 
 def change_password(request,id):
     if 'user' in request.session:
+        data = user.objects.get(fname=request.session['user'])
         if request.method == 'POST':
             data = user.objects.get(fname=request.session['user'])
             old_password = request.POST['old_password']
@@ -95,11 +102,27 @@ def change_password(request,id):
                 user.objects.get(passeword=old_password)
                 user.objects.all().filter(id=id).update(passeword=new_password)
                 text = "Your Password Is Change"
-                return render(request, 'change_password.html',{'text':text})
+                return render(request, 'change_password.html',{'text':text,'data':data})
             except:
                 false = "Old Password is Not Match"
-                return render(request, 'change_password.html',{'false':false})
+                return render(request, 'change_password.html',{'false':false,'data':data})
         else:
-            return render(request, 'change_password.html',)
+            return render(request, 'change_password.html',{'data':data})
+    else:
+        return redirect('login')
+
+def contact(request):
+    if request.method == 'POST':
+        fname = request.POST['name']
+        email = request.POST['email']
+        message = request.POST['message']
+        Contact = contact(name = fname, email = email, message=message)
+        Contact.save()
+        return redirect('index')
+
+def logout(request):
+    if 'user' in request.session:
+        del request.session['user']
+        return redirect('login')
     else:
         return redirect('login')
