@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% include 'header.html' %}
+    <style>
+        #tables {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 50%;
+            margin-top: 20px;
+            margin-left: 300px;
+            margin-right: 300px;
+        }
+
+        #tables td,
+        #tables th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #tables tr:nth-child(even) {
+            background-color: #ddd;
+        }
+
+        #tables tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        #tables th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #3da8da;
+            color: white;
+
+        }
+
+        #dropdown,
+        #submit {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <br><br><br>
+    <h2 style="text-align: center;">Update Status</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <table id="tables">
+            <tr>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>
+                    <select name='status' id="dropdown">
+                        <option value="Working">Working</option>
+                        <option value="Working Done">Working Done</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="color: darkslateblue;">
+                    <input type="submit" id="submit" value="Update">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <br><br><br>
+    {% include 'footer.html' %}
+</body>
+
+</html>

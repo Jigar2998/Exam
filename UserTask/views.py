@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import request
-from .models import user,contact
+from .models import user,contact,task_assign
 from django.core.files.storage import FileSystemStorage
 # Create your views here.
 
@@ -56,6 +56,26 @@ def index(request):
     else:
         return redirect('login')
 
+
+def task_list(request):
+    if 'user' in request.session:
+        data = user.objects.get(fname=request.session['user'])
+        task = task_assign.objects.all().filter(assign_user_id=data.id)
+        return render(request, 'task_list.html',{'data':data,'task':task})
+    else:
+        return redirect('login')
+
+def update_status(request,id):
+    if 'user' in request.session:
+        data = user.objects.get(fname=request.session['user'])
+        if request.method == 'POST':
+            status = request.POST['status']
+            task_assign.objects.all().filter(id=id).update(status=status)
+            return redirect('task_list')
+        else:
+            return render(request, 'update_status.html',{'data':data})
+    else:
+        return redirect('login')
 
 def profile(request):
     if 'user' in request.session:
@@ -116,7 +136,7 @@ def contact(request):
         fname = request.POST['name']
         email = request.POST['email']
         message = request.POST['message']
-        Contact = contact(name = fname, email = email, message=message)
+        Contact = contact(name=fname, email=email, message=message)
         Contact.save()
         return redirect('index')
 
