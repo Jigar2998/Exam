@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/login_style.css' %}" />
+</head>
+
+<body>
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+
+            <!-- Icon -->
+            <div class="fadeIn first">
+                <label style="margin-top: 20px;">Login</label>
+            </div>
+
+            <!-- Login Form -->
+            <form style="margin-top: 20px;" method="POST">
+                {% csrf_token %}
+                <input type="text" id="fname" class="fadeIn second" name="fname" placeholder="First Name">
+                <input type="text" id="lname" class="fadeIn third" name="lname" placeholder="Last Name">
+                <div class="form-group">
+                    <div class="col-md 6">
+                    <input type="text" id="email" class="fadeIn third" name="lname" placeholder="Last Name">
+                </div>
+                    <input type="text" id="mobile" class="fadeIn third" name="lname" placeholder="Last Name">
+                </div>
+                <input type="text" id="lname" class="fadeIn third" name="lname" placeholder="Last Name">
+                <input type="submit" class="fadeIn fourth" value="Log In">
+            </form>
+            <div class="fadeIn last" style="margin-bottom: 10px;">
+                <a href="">Don't have an Account Register</a>
+            </div>
+            <!-- Remind Passowrd -->
+            <div id="formFooter">
+                <a class="underlineHover" href="#">Forgot Password?</a>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
