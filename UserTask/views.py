@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import request
 from .models import user,contact,task_assign
 from django.core.files.storage import FileSystemStorage
+import smtplib
+from django.core.mail import send_mail
+
 # Create your views here.
 
 
@@ -28,6 +31,7 @@ def register(request):
                     birth_date=dob, address=address, image=image, passeword=password)
         User.save()
         text = 'Registration Successfully completed'
+        send_mail('Registered Successfully', f'Hello {fname} \n You Are registered Successfuly in Our System!', 'jigarramani40@gmail.com', [f'{email}'])
         return render(request, 'registration.html', {'text': text})
     else:
         return render(request, 'registration.html')
