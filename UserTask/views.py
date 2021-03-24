@@ -140,7 +140,7 @@ def contact(request):
         fname = request.POST['name']
         email = request.POST['email']
         message = request.POST['message']
-        Contact = contact(name=fname, email=email, message=message)
+        Contact = contact(name=fname,email=email,message=message)
         Contact.save()
         return redirect('index')
 
