@@ -44,7 +44,6 @@ def login(request):
         try:
             User = user.objects.get(email=mail, passeword=password)
             request.session['user'] = User.fname
-            data = user.objects.get(fname=User.fname)
             return redirect('index')
         except:
             text = 'Invalid Login Credential'
